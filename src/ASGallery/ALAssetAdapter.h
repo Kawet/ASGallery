@@ -32,4 +32,8 @@
 
 @property(nonatomic,strong) ALAsset* asset;
 
+-(UIImage*)cachedImageForType:(ASGalleryImageType)imageType;
+-(void)setImageCache:(UIImage*)image forType:(ASGalleryImageType)imageType;
+
+
 @end
