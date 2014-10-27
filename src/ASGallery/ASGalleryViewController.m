@@ -45,6 +45,8 @@
     
     CGRect rect = [UIScreen mainScreen].bounds;
     CGFloat height = UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ? rect.size.height : rect.size.width;
+    if(NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1)
+        height = rect.size.height;
     
     CGRect frame = self.shiftView.frame;
     frame.origin.y = self.frame.size.height - height;
@@ -167,7 +169,7 @@
 - (CGRect)frameForPagingScrollView {
     CGRect frame = [[UIScreen mainScreen] bounds];
     
-    if (!UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
+    if (!UIInterfaceOrientationIsPortrait(self.interfaceOrientation) && NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
         frame.size = CGSizeMake(frame.size.height,frame.size.width);
     frame.origin.x -= PADDING;
     frame.size.width += (2 * PADDING);
@@ -209,7 +211,7 @@
     pagingScrollView.delegate = self;
     
     CGRect frameForParentView = [[UIScreen mainScreen] bounds];
-    if (!UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
+    if (!UIInterfaceOrientationIsPortrait(self.interfaceOrientation) && NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
         frameForParentView.size = CGSizeMake(frameForParentView.size.height,frameForParentView.size.width);
     
     ShiftContentView* shiftContentView = [[ShiftContentView alloc] initWithFrame:frameForParentView];
